@@ -1,7 +1,7 @@
-const http = require('http');
-const express = require('express');
-const cors = require('cors');
-const {Server} = require("socket.io");
+import http from 'http'
+import express from 'express'
+import cors from 'cors'
+import {Server} from 'socket.io'
 
 
 
