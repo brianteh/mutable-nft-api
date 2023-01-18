@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 const io = new Server(server,{
     cors:{
-        origin:"https://www.gamingtoad.ml/",//the domain where the app is
+        origin:"https://www.gamingtoad.ml:443",//the domain where the app is
         method:["GET","POST"],
     },
 });
