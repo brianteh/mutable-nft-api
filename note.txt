@@ -1,0 +1,19 @@
+#create middleware which will be run before any app.get() by using xxx() in convention would be next()
+
+example:
+
+    const setDate = function (req,res,next){
+        req.date = Date.now()
+        next()
+    }
+
+    app.use(setDate)
+
+    app.get("",(req,res)=>{
+        console.log(req.date)
+        res.send(req.date)
+    })
+
+#use jwt to lock user so that they could only run one instance
+
+#emit "server_full" to change server
