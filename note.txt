@@ -17,3 +17,7 @@ example:
 #use jwt to lock user so that they could only run one instance
 
 #emit "server_full" to change server
+
+#use js library zod for validating types 
+
+#try and catch for fail safe api
