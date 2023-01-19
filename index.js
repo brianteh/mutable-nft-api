@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 const io = new Server(server,{
     cors:{
-        origin:"https://www.gamingtoad.ml:3000",//the domain where the app is
+        origin:"https://muteable-nft-d37y.vercel.app",//the domain where the app is
         method:["GET","POST"],
     },
 });
