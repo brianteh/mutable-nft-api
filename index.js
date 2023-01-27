@@ -60,6 +60,13 @@ io.of("/user").on("connection", (socket)=>{
         console.log(rooms)
     })
 
+    ///////////////
+    // js library zod 
+    socket.on("movement_self_player",(data)=>{
+        let direction = data.direction;
+        let user_id = data.user_id;
+    })
+
 
 
 });

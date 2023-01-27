@@ -18,6 +18,6 @@ example:
 
 #emit "server_full" to change server
 
-#use js library zod for validating types 
+#use js library zod for validating types ==> all payloads, the metadata to be exact
 
-#try and catch for fail safe api
+#try and catch for fail safe api || error handling for api
