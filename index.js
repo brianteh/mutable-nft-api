@@ -120,7 +120,6 @@ io.of("/user").on("connection", (socket)=>{
         let _index = game_state.all_player_pos.findIndex((e)=>{return e.player_id == data.user_id })
         game_state.all_player_pos[_index].x = data.user_x
         game_state.all_player_pos[_index].y = data.user_y
-        //game_state.all_player_pos.push({player_id:data.user_id,x:data.user_x,y:data.user_y})
 
         //console.log({user_id:data.user_id,user_x:data.user_x,user_y:data.user_y})
     })
