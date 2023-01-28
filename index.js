@@ -26,6 +26,18 @@ for(let i=0;i<MAX_ROOMS;i++){
     rooms.push({room_id: i,num: 0})
 }
 
+// game state
+
+
+
+// miscellaneous functions
+function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+}
+function getKeysByValue(object, value) {   
+    return Object.keys(object).filter(key => object[key] === value); 
+}
+
 // User Socket
 io.of("/user").on("connection", (socket)=>{
     
@@ -44,10 +56,20 @@ io.of("/user").on("connection", (socket)=>{
     socket.join(room_id)
 
     // Notice other players in the same room
-    socket.to(room_id).emit("new_player", {user_id:socket_id})
+    socket.to(room_id).emit("new_player", 
+    {
+        user_id:socket_id,
+        user_property:{
+            walking_speed: 2,
+            jumping_power: 2
+        }// load from nft
+    }
+    )
 
     console.log(users)
     console.log(rooms)
+
+
 
     // When player disconnect
     socket.on('disconnect',()=>{
@@ -56,15 +78,29 @@ io.of("/user").on("connection", (socket)=>{
         rooms[users[socket_id]].num-=1
         delete users[socket_id]
         
-        console.log(users)
-        console.log(rooms)
+        // console.log(users)
+        // console.log(rooms)
+        console.log(`${socket_id} left room ${room_id}`)
+    })
+    
+    // Load players who previously joined the room
+    socket.on("req_load_prev_player",()=>{
+        let all_player = getKeysByValue(users,room_id)
+        socket.emit("load_prev_player",{
+            all_player:all_player,
+            user_property:{
+                walking_speed: 2,
+                jumping_power: 2
+            }// load from nft
+
+        })
+        console.log(room_id,all_player)
     })
 
-    ///////////////
-    // js library zod 
+    // Relaying movement data according to room
     socket.on("movement_self_player",(data)=>{
-        let direction = data.direction;
-        let user_id = data.user_id;
+        socket.to(room_id).emit("movement_all_player",{user_id:data.user_id,user_x:data.user_x,user_y:data.user_y})
+        //console.log({user_id:data.user_id,user_x:data.user_x,user_y:data.user_y})
     })
 
 
